@@ -1,70 +1,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class PoolMono<T> where T : MonoBehaviour
+namespace Infrastructure.PoolObject
 {
-    public T Prefab { get; }
-    public bool AutoExpand { get; set; } 
-    public Transform Container { get; set; }
-    private List<T> _pool;
-    public PoolMono(T prefab, int poolCapacity)
+    public class PoolMono<T> where T : MonoBehaviour
     {
-        Prefab = prefab;
-        Container = null;
-        CreatePool(poolCapacity);
-    }
-    public PoolMono(T prefab, int poolCapacity, Transform container)
-    {
-        Prefab = prefab;
-        Container = container;
-        CreatePool(poolCapacity);
-    }
-    private void CreatePool(int capacity)
-    {
-        _pool = new List<T>();
-        for (int i = 0; i < capacity; i++)
+        public T Prefab { get; }
+        public bool AutoExpand { get; set; } 
+        public Transform Container { get; set; }
+        private List<T> _pool;
+        public PoolMono(T prefab, int poolCapacity)
         {
-            _pool.Add(CreateObject());
+            Prefab = prefab;
+            Container = null;
+            CreatePool(poolCapacity);
         }
-    }
-    private T CreateObject(bool isActiveByDefault = false)
-    {
-        var instance = Object.Instantiate(Prefab, Container);
-        instance.gameObject.SetActive(isActiveByDefault);
-        return instance;
-    }
-    public bool HasFreeElement(out T element)
-    {
-        foreach (var obj in _pool)
+        public PoolMono(T prefab, int poolCapacity, Transform container)
         {
-            if (!obj.gameObject.activeInHierarchy)
+            Prefab = prefab;
+            Container = container;
+            CreatePool(poolCapacity);
+        }
+        private void CreatePool(int capacity)
+        {
+            _pool = new List<T>();
+            for (int i = 0; i < capacity; i++)
             {
-                element = obj;
-                obj.gameObject.SetActive(true);
-                return true;
+                _pool.Add(CreateObject());
             }
         }
-        element = null;
-        return false;
-    }
-    public T GetFreeElement()
-    {
-        if (HasFreeElement(out T element))
+        private T CreateObject(bool isActiveByDefault = false)
         {
-            return element;
+            var instance = Object.Instantiate(Prefab, Container);
+            instance.gameObject.SetActive(isActiveByDefault);
+            return instance;
         }
-        if (AutoExpand)
-            return CreateObject(true);
-        throw new System.Exception($"Pool<{typeof(T)}is overflow");
-    }
-    public T[] GetFreeElements(int count)
-    {
-        T[] elements = new T[count];    
-        for (int i = 0; i < elements.Length; i++)
+        public bool HasFreeElement(out T element)
         {
-            elements[i] = GetFreeElement();
+            foreach (var obj in _pool)
+            {
+                if (!obj.gameObject.activeInHierarchy)
+                {
+                    element = obj;
+                    obj.gameObject.SetActive(true);
+                    return true;
+                }
+            }
+            element = null;
+            return false;
         }
-        return elements;
+        public T GetFreeElement()
+        {
+            if (HasFreeElement(out T element))
+            {
+                return element;
+            }
+            if (AutoExpand)
+                return CreateObject(true);
+            throw new System.Exception($"Pool<{typeof(T)}is overflow");
+        }
+        public T[] GetFreeElements(int count)
+        {
+            T[] elements = new T[count];    
+            for (int i = 0; i < elements.Length; i++)
+            {
+                elements[i] = GetFreeElement();
+            }
+            return elements;
+        }
     }
 }
