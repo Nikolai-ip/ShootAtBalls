@@ -1,17 +1,16 @@
-﻿using Assets.Scripts.Cmd;
-using GameCore;
+﻿using GameCore;
 using Infrastructure.Factory;
-using Infrastructure.Services;
+using Infrastructure.SceneLoader;
 
 namespace Infrastructure.GameSM.GameState
 {
     public class LoadLevelState : IPayLoadedState<string>, IState
     {
         private readonly GameStateMachine _gameSm;
-        private readonly SceneLoader _sceneLoader;
+        private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader,IGameFactory gameFactory)
+        public LoadLevelState(GameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory)
         {
             _gameSm = gameStateMachine;
             _sceneLoader = sceneLoader;

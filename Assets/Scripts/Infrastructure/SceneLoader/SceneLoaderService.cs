@@ -3,14 +3,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Infrastructure.Services
+namespace Infrastructure.SceneLoader
 {
-    public class SceneLoader
+    public class SceneLoaderService:ISceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
         public string CurrentScene => SceneManager.GetActiveScene().name;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner)
+        public SceneLoaderService(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
         }

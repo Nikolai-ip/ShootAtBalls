@@ -6,6 +6,7 @@ using Infrastructure.Cmd;
 using Infrastructure.Factory;
 using Infrastructure.GameSM;
 using Infrastructure.GameSM.GameState;
+using Infrastructure.SceneLoader;
 using Infrastructure.Services;
 using Infrastructure.Services.ServiceLocator;
 
@@ -15,7 +16,7 @@ namespace GameCore
     {
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _currentState;
-        public GameStateMachine(SceneLoader sceneLoader, GameServices services)
+        public GameStateMachine(ISceneLoader sceneLoader, GameServices services)
         {
             _states = new Dictionary<Type, IExitableState>()
             {

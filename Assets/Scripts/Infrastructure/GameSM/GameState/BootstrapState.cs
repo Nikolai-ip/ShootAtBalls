@@ -1,6 +1,7 @@
 ﻿using GameCore;
 using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
+using Infrastructure.SceneLoader;
 using Infrastructure.Services;
 using Infrastructure.Services.ServiceLocator;
 using Input;
@@ -12,10 +13,10 @@ namespace Infrastructure.GameSM.GameState
         private const string InitialScene  = "Initial";
         private const string MainScene = "Main";
         private readonly GameStateMachine _gameSm;
-        private readonly SceneLoader _sceneLoader;
+        private readonly ISceneLoader _sceneLoader;
         private GameServices _services;
 
-        public BootstrapState(GameStateMachine gameSm, SceneLoader sceneLoader, GameServices gameServices)
+        public BootstrapState(GameStateMachine gameSm, ISceneLoader sceneLoader, GameServices gameServices)
         {
             _gameSm = gameSm;
             _sceneLoader = sceneLoader;

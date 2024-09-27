@@ -1,4 +1,5 @@
 using GameCore;
+using Infrastructure.SceneLoader;
 using Infrastructure.Services;
 using Infrastructure.Services.ServiceLocator;
 
@@ -10,7 +11,7 @@ namespace Infrastructure
 
         public Game(ICoroutineRunner coroutineRunner)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), GameServices.Container);
+            StateMachine = new GameStateMachine(new SceneLoaderService(coroutineRunner), GameServices.Container);
         }
     }
 }
