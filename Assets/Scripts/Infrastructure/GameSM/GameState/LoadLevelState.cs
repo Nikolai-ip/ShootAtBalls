@@ -9,12 +9,13 @@ namespace Infrastructure.GameSM.GameState
         private readonly GameStateMachine _gameSm;
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
-
-        public LoadLevelState(GameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory)
+        private readonly IGameEntitiesFactory _gameEntitiesFactory;
+        public LoadLevelState(GameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory, IGameEntitiesFactory gameEntitiesFactory)
         {
             _gameSm = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
+            _gameEntitiesFactory = gameEntitiesFactory;
         }
         public void Enter(string sceneName)
         {
@@ -32,6 +33,8 @@ namespace Infrastructure.GameSM.GameState
         private void OnLoaded()
         {
             _gameFactory.CreateView();
+            _gameFactory.CreateControllers();
+            _gameEntitiesFactory.CreateGameEntities();
             _gameSm.Enter<GameCycle>();
         }
     }

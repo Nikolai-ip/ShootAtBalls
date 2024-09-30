@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameCore.Projectile
 {
-    public class Ball : ProjectileBase
+    public class Bubble : ProjectileBase
     {
     }
 }

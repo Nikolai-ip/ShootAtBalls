@@ -1,6 +1,6 @@
-﻿using Infrastructure.AssetManagement;
+﻿using GameCore.Gun;
+using Infrastructure.AssetManagement;
 using Input;
-using UnityEngine;
 
 namespace Infrastructure.Factory
 {
@@ -15,18 +15,16 @@ namespace Infrastructure.Factory
             _assetProvider = assetProvider;
             _inputHandler = inputHandler;
         }
-
-
-        private void CreateHud()
-        {
-            var window = _assetProvider.Instantiate(AssetPath.PrefabWindow, at:Vector3.zero);
-            window.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
-            window.GetComponent<Canvas>().worldCamera = Camera.main;
-        }
-
+        
         public void CreateView()
         {
         }
         
+        public void CreateControllers()
+        {
+            var mouseInput = _assetProvider.Instantiate(AssetPath.MouseInputPrefab);
+            mouseInput.GetComponent<IInputProvider>().Init(_inputHandler);
+        }
+
     }
 }

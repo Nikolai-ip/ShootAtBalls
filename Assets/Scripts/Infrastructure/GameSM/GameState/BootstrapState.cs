@@ -43,9 +43,11 @@ namespace Infrastructure.GameSM.GameState
 
         private void RegisterServices()
         {
-            _services.RegisterSingle<IInputHandler>(new InputController());
+            _services.RegisterSingle<IInputHandler>(new MouseInputHandler());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IInputHandler>()));
+            _services.RegisterSingle<IGameEntitiesFactory>(new GameEntitiesFactory(_services.Single<IAssetProvider>(), _services.Single<IInputHandler>()));
+
         }
 
         public void Exit()
