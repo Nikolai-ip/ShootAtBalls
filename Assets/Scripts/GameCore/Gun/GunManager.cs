@@ -18,6 +18,7 @@ namespace GameCore.Gun
             _inputHandler = inputHandler;
             _inputHandler.OnPointMoved += OnPointMoved;
             _inputHandler.OnPointUp += OnPointUp;
+            _inputHandler.OnPointDown += OnPointDown;
             _rotateController = GetComponent<RotateController>();
             _shotController = GetComponent<ShotController>();
         }
@@ -32,7 +33,12 @@ namespace GameCore.Gun
         { 
             _rotateController.Rotate(at:position);
             _pointPos = position;
-        } 
+        }
+
+        private void OnPointDown()
+        {
+            _shotController.StartAccumSpeed();
+        }
 
         private void OnPointUp()
         {

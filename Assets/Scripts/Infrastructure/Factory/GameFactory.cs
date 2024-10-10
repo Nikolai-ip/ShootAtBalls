@@ -47,12 +47,6 @@ namespace Infrastructure.Factory
             CreateTrajectoryDrawer();
         }
 
-        private void CreateCanvas()
-        {
-            _canvas = _assetProvider.Instantiate(AssetPath.Canvas).GetComponent<Canvas>();
-            _canvas.worldCamera = Camera.main;
-        }
-
         private void CreateProjectileContainer()
         {
             _projectileContainer = _assetProvider
@@ -76,6 +70,12 @@ namespace Infrastructure.Factory
             bubbleField.Init(_staticDataService.BubbleFieldData);
         }
 
+        private void CreateCanvas()
+        {
+            _canvas = _assetProvider.Instantiate(AssetPath.Canvas).GetComponent<Canvas>();
+            _canvas.worldCamera = Camera.main;
+        }
+
         private void CreateBubbleIndicators()
         {
 
@@ -83,7 +83,7 @@ namespace Infrastructure.Factory
             var magazineIndicator =
                 _assetProvider.Instantiate<BubbleMagazineIndicator>(AssetPath.MagazineIndicatorPrefab);
             magazineIndicator.Init(GetIndicators(),_projectileContainer);
-            magazineIndicator.transform.SetParent(_canvas.transform);
+            magazineIndicator.transform.SetParent(_canvas.transform, false);
             
             gunIndicator.Init(GetIndicators(),_shotController);
         }
@@ -112,7 +112,7 @@ namespace Infrastructure.Factory
         private void CreateTrajectoryDrawer()
         {
             var trajectoryDrawer = _assetProvider.Instantiate<TrajectoryDrawer>(AssetPath.TrajectoryDrawerPrefab);
-            trajectoryDrawer.Init(_shotController.ShotPoint,_inputHandler);
+            trajectoryDrawer.Init(_shotController.ShotPoint,_inputHandler, _shotController);
 
         }
     }

@@ -106,6 +106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotPoint: {fileID: 3306413686969967049}
+  _maxSpeedRatio: 1.5
+  _stepAccum: 0.01
+  _maxScatterAngle: 5
 --- !u!1 &5957759967603718585
 GameObject:
   m_ObjectHideFlags: 0

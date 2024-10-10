@@ -21,6 +21,7 @@ namespace GameCore
             _states = new Dictionary<Type, IExitableState>()
             {
                 {typeof(BootstrapState), new BootstrapState(this, sceneLoader, services)},
+                {typeof(MainMenu), new MainMenu(this,sceneLoader)},
                 {typeof(LoadLevelState), new LoadLevelState(this, sceneLoader,services.Single<IGameFactory>())},
                 {typeof(GameCycle), new GameCycle(this)},
             };

@@ -7,6 +7,8 @@ namespace GameCore.Projectile.Container
     {
         TProjectile GetProjectile();
         int MagazineCapacity { get; }
-        event Action<IEnumerable<TProjectile>> MagazineChanged ;
+        TProjectile NextProjectile { get; }
+        event Action<int> MagazineCapacityChanged;
+        event Action<TProjectile> NextProjectileChanged ;
     }
 }

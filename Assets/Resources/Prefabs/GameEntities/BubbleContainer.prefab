@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f23202c9a624dbeb6d77fa2318efd65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _capacity: 20
+  _containerCapacity: 20
   _prefabs:
   - {fileID: 3263512434971577019, guid: 497b1b1f049945a419ef49d7930a578f, type: 3}
   - {fileID: 3263512434971577019, guid: fece8dc92d61c034788cfa4ed157259f, type: 3}
   - {fileID: 3263512434971577019, guid: 79e3e38532384654b9ac5d52cdac7061, type: 3}
-  _countOfSubsequentProjectiles: 0
+  _magazineCapacity: 20

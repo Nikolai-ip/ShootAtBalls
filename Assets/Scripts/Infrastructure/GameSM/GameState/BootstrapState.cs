@@ -12,7 +12,8 @@ namespace Infrastructure.GameSM.GameState
     public class BootstrapState:IState
     {
         private const string InitialScene  = "Initial";
-        private const string MainScene = "Main";
+        private const string MainScene = "Main"; 
+        private const string MainMenu = "Menu";
         private readonly GameStateMachine _gameSm;
         private readonly ISceneLoader _sceneLoader;
         private readonly GameServices _services;
@@ -26,20 +27,12 @@ namespace Infrastructure.GameSM.GameState
         }
         public void Enter()
         {
-            if (_sceneLoader.CurrentScene == MainScene)
-            {
-                _gameSm.Enter<LoadLevelState>();
-            }
-            else
-            {
-                _sceneLoader.Load(InitialScene, EnterLoadLevel);
-
-            }
+            _sceneLoader.Load(InitialScene, EnterLoadLevel);
         }
 
         private void EnterLoadLevel()
         {
-            _gameSm.Enter<LoadLevelState, string>(MainScene);
+            _gameSm.Enter<MainMenu, string>(MainMenu);
         }
 
         private void RegisterServices()
