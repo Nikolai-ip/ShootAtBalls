@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameCore.Gun
+namespace GameCore.GameControllers
 {
     public class RotateController:MonoBehaviour
     {

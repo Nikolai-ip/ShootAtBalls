@@ -5,6 +5,7 @@ using Infrastructure.SceneLoader;
 using Infrastructure.Services;
 using Infrastructure.Services.ServiceLocator;
 using Input;
+using StaticData;
 
 namespace Infrastructure.GameSM.GameState
 {
@@ -14,7 +15,7 @@ namespace Infrastructure.GameSM.GameState
         private const string MainScene = "Main";
         private readonly GameStateMachine _gameSm;
         private readonly ISceneLoader _sceneLoader;
-        private GameServices _services;
+        private readonly GameServices _services;
 
         public BootstrapState(GameStateMachine gameSm, ISceneLoader sceneLoader, GameServices gameServices)
         {
@@ -45,8 +46,13 @@ namespace Infrastructure.GameSM.GameState
         {
             _services.RegisterSingle<IInputHandler>(new MouseInputHandler());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IInputHandler>()));
-            _services.RegisterSingle<IGameEntitiesFactory>(new GameEntitiesFactory(_services.Single<IAssetProvider>(), _services.Single<IInputHandler>()));
+            _services.RegisterSingle<IStaticDataService>(new StaticDataService());
+            _services.Single<IStaticDataService>().LoadGameFieldData();
+            _services.RegisterSingle<IGameFactory>
+            (new GameFactory(
+                    _services.Single<IAssetProvider>(),
+                    _services.Single<IInputHandler>(), 
+                    _services.Single<IStaticDataService>()));
 
         }
 
