@@ -23,11 +23,10 @@ namespace GameCore.Projectile
 
         public bool StartBurst(bool accum = false, BubbleType? bubbleType = null)
         {
-            // Если первый шарик уже взорван или его цвет не совпадает, завершить
             if (_isBurst || (bubbleType != null && bubbleType.Value != _type))
                 return false;
             _isBurst = true;
-            bool foundMatchingBubble = false; // Флаг для отслеживания совпадений
+            bool foundMatchingBubble = false; 
 
             Collider2D[] colliders = new Collider2D[MaxBubbleCollisions];
             Physics2D.OverlapCircleNonAlloc(_tr.position, _searchRadius, colliders);

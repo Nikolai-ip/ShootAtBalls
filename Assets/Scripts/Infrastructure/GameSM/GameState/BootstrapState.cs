@@ -2,10 +2,10 @@
 using Infrastructure.AssetManagement;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
-using Infrastructure.Services;
 using Infrastructure.Services.ServiceLocator;
 using Input;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.GameSM.GameState
 {
@@ -24,6 +24,7 @@ namespace Infrastructure.GameSM.GameState
             _sceneLoader = sceneLoader;
             _services = gameServices;
             RegisterServices();
+            Application.targetFrameRate = 60;
         }
         public void Enter()
         {

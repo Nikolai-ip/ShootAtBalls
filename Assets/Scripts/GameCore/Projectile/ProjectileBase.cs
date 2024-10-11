@@ -8,6 +8,7 @@ namespace GameCore.Projectile
         protected Transform Tr;
         protected Vector2 Dir;
         [SerializeField] protected float Speed;
+        [SerializeField] protected float MaxSpeed;
         private float _originSpeed;
         private SpriteRenderer _sr;
         private Collider2D _col;
@@ -33,6 +34,7 @@ namespace GameCore.Projectile
         public void ApplySpeedRatio(float speedRatio)
         {
             Speed *= speedRatio;
+            Speed = Mathf.Clamp(Speed, _originSpeed, MaxSpeed);
         }
         public void Enable()
         {

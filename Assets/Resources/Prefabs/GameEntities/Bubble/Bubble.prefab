@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1806762604617259896}
   - component: {fileID: -5247556158842703132}
   - component: {fileID: 3247963137088315473}
+  - component: {fileID: 1843810478723267123}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -103,7 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 15
+  MaxSpeed: 22.5
   _type: 0
+  _angleCollisionToReplace: 10
 --- !u!114 &6368621281560284199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectSize: {x: 0.5, y: 0.5}
-  _collisionThreshold: 0.05
+  _collisionThreshold: 0.1
+  _extraPadding: 0.05
 --- !u!58 &2075218109760244087
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -205,3 +209,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _additionalRadius: 0.1
+--- !u!114 &1843810478723267123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310029563284584181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68bf46c4d644b37b8deb7f18763a4ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _replaceTime: 0.1
